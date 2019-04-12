@@ -20,6 +20,8 @@ class receipt:
         return str(self.__purchases)
     def addItem(self, item):
         self.__purchases.append(item)
+    def getItem(self, index):
+        return self.__purchases[index]
 
 print('Welcome to receipt creator')
 newReceipt = receipt()
@@ -46,10 +48,10 @@ print("{:-^20}".format("Receipt", str(datetime.datetime.now())))
 subtotal = 0
 taxTotal = 0
 for x in newReceipt.__purchases:
-    print("{}{:_>20.2f}".format(receipt[x].__name, newReceipt[x].__price))
+    print("{}{:_>20.2f}".format(receipt[x].__name, newReceipt.getItem(x).__price))
     subtotal += receipt[x].__price
-    if (receipt[x].__taxable):
-        taxTotal += newReceipt[x].__price * newReceipt.__tax_rate
+    if (newReceipt.getItem(x).__taxable):
+        taxTotal += newReceipt.getItem(x).__price * newReceipt.__tax_rate
 total = subtotal + taxTotal
 print()
 print("{}{:_>20.2f}").format("Sub Total", subtotal)
