@@ -1,5 +1,5 @@
 import datetime
-class item:
+class item():
 
     def __init__(self, __name, __price, __taxable):
         self.__name = __name
@@ -11,7 +11,7 @@ class item:
         return self.__price
     def getTax(self, __tax_rate):
         return self.__price + (self.__price * receipt.__tax_rate)
-class receipt:
+class receipt():
 
     def __init__(self, __tax_rate = 0.07, __purchases = []):
         self.__tax_rate = __tax_rate
@@ -21,7 +21,15 @@ class receipt:
     def addItem(self, item):
         self.__purchases.append(item)
     def getItem(self, index):
-        return self.__purchases[index]
+        return self.__purchases[int(index)]
+    def createReceipt(self, subtotal = 0, taxTotal = 0, total = 0):
+        total = subtotal + taxTotal
+        for x in range(len(self.__purchases)):
+            print("{}{:_>20.2f}".format(self.getItem(x).__name, self.getItem(x).__price))
+            subtotal += self.getItem(x).__price
+            if (self.getItem(x).__taxable):
+                taxTotal += self.getItem(x).__price * self.__tax_rate
+
 
 print('Welcome to receipt creator')
 newReceipt = receipt()
@@ -40,20 +48,12 @@ while (end):
     else:
         itemTaxable = False
     newItem = item(itemName, itemPrice, itemTaxable)
-    receipt.addItem(newItem)
+    newReceipt.addItem(newItem)
     if (stop == 'no'):
         end = False
-
+newReceipt.createReceipt()
 print("{:-^20}".format("Receipt", str(datetime.datetime.now())))
-subtotal = 0
-taxTotal = 0
-for x in newReceipt.__purchases:
-    print("{}{:_>20.2f}".format(receipt[x].__name, newReceipt.getItem(x).__price))
-    subtotal += receipt[x].__price
-    if (newReceipt.getItem(x).__taxable):
-        taxTotal += newReceipt.getItem(x).__price * newReceipt.__tax_rate
-total = subtotal + taxTotal
 print()
-print("{}{:_>20.2f}").format("Sub Total", subtotal)
-print("{}{:_>20.2f}").format("Tax", taxTotal)
-print("{}{:_>20.2f}").format("Total", total)
+print("{}{:_>20.2f}").format("Sub Total", newReceipt.subtotal)
+print("{}{:_>20.2f}").format("Tax", newReceipt.taxTotal)
+print("{}{:_>20.2f}").format("Total", newReceipt.total)
