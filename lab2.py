@@ -1,12 +1,12 @@
 import datetime
 class item():
 
-    def __init__(self, __name, __price, __taxable):
-        self.__name = __name
-        self.__price = __price
-        self.__taxable = __taxable
+    def __init__(self, _receipt__name, _receipt__price, _receipt__taxable):
+        self._receipt__name = _receipt__name
+        self._receipt__price = _receipt__price
+        self._receipt__taxable = _receipt__taxable
     def __str__(self):
-        return str(self.__name)
+        return str(self._receipt__name)
     def getPrice(self):
         return self.__price
     def getTax(self, __tax_rate):
@@ -23,13 +23,19 @@ class receipt():
     def getItem(self, index):
         return self.__purchases[int(index)]
     def createReceipt(self, subtotal = 0, taxTotal = 0, total = 0):
-        total = subtotal + taxTotal
+        print(self.getItem(0))
+        print(("-----Receipt " + str(datetime.datetime.now())+"-----"))
+        print()
         for x in range(len(self.__purchases)):
-            print("{}{:_>20.2f}".format(self.getItem(x).__name, self.getItem(x).__price))
+            print("{:_<20}{:_>20.2f}".format(self.getItem(x).__name, self.getItem(x).__price))
             subtotal += self.getItem(x).__price
             if (self.getItem(x).__taxable):
                 taxTotal += self.getItem(x).__price * self.__tax_rate
-
+        total = subtotal + taxTotal
+        print()
+        print("{:_<20}{:_>20.2f}".format("Sub Total", subtotal))
+        print("{:_<20}{:_>20.2f}".format("Tax", taxTotal))
+        print("{:_<20}{:_>20.2f}".format("Total", total))
 
 print('Welcome to receipt creator')
 newReceipt = receipt()
@@ -52,8 +58,3 @@ while (end):
     if (stop == 'no'):
         end = False
 newReceipt.createReceipt()
-print("{:-^20}".format("Receipt", str(datetime.datetime.now())))
-print()
-print("{}{:_>20.2f}").format("Sub Total", newReceipt.subtotal)
-print("{}{:_>20.2f}").format("Tax", newReceipt.taxTotal)
-print("{}{:_>20.2f}").format("Total", newReceipt.total)
