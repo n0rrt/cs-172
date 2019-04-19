@@ -24,16 +24,16 @@ class Fraction:
         else:
             return self.gcd(b, a % b)
     def __add__(self, other):
-        return ((self.num * other.den) + (self.den * other.num)), (self.den * other.num)
+        return Fraction(((self.num * other.den) + (self.den * other.num)), (self.den * other.num))
     def __sub__(self, other):
-        return (self.num, self.den) + (-1*other.num, other.den)
+        return Fraction(self.num, self.den) + Fraction(-1*other.num, other.den)
     def __mul__(self, other):
-        return (self.num * other.num), (self.den * other.den)
+        return Fraction((self.num * other.num), (self.den * other.den))
     def __truediv__(self, other):
-        return (self.num * other.den), (self.den * other.num)
+        return Fraction((self.num * other.den), (self.den * other.num))
     def __pow__(self, exp):
         if exp == 0:
-            return 1
+            return Fraction(1,1)
         elif exp < 0:   
             temp = self.num
             self.num = self.den
@@ -42,7 +42,13 @@ class Fraction:
         elif exp > 0:
             return (self.__pow__(exp-1))
 if __name__ == "__main__":
-    
+    frac1 = Fraction(2,3)
+    frac2 = Fraction(3,4)
+    print(frac1 + frac2)
+    print(frac1 - frac2)
+    print(frac1 * frac2)
+    print(frac1 / frac2)
+    print(frac1 ** 2)
     def H(n):
         
         total = Fraction(0,1)
