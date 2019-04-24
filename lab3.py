@@ -43,13 +43,13 @@ class Fraction:
             return self*(self.__pow__(exp-1))
 if __name__ == "__main__":
     #debugging
-    frac1 = Fraction(2,3)
+    '''frac1 = Fraction(2,3)
     frac2 = Fraction(3,4)
     print(frac1 + frac2)
     print(frac1 - frac2)
     print(frac1 * frac2)
     print(frac1 / frac2)
-    print(frac1 ** 2)
+    print(frac1 ** 2)'''
 
     def H(n):
         total = Fraction(0,1)
