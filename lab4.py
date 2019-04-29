@@ -4,6 +4,7 @@
 
 
 from lab4_monsters import *
+
 import random
 
 #This function has two monsters fight and returns the winner
@@ -58,7 +59,7 @@ def monster_battle(m1, m2):
 		elif(move>=61 and move <= 80):
 			#Defend!
 			attacker.defenseAttack(defender)
-			print("{} usef {} on {}".format(attacker.getName(), attacker.defenseName(), defender.getName()))
+			print("{} used {} on {}".format(attacker.getName(), attacker.defenseName(), defender.getName()))
 		else:
 			#Special Attack!
 			attacker.specialAttack(defender)
@@ -76,9 +77,10 @@ def monster_battle(m1, m2):
 	#Return who won
 	######TODO######
 	if m1.getHealth() <= 0:
-		return "{} wins".format(m2.getName())
+		return m2
 	else:
-		return "{} wins".format(m1.getName())
+		return m1
+		
 #----------------------------------------------------
 if __name__=="__main__":
 	#Every battle should be different, so we need to
@@ -89,8 +91,19 @@ if __name__=="__main__":
 	first = bear()
 	second = lapras()
 	
-	winner = monster_battle(first,second)
+	winner1 = monster_battle(first,second)
 	
 	#Print out who won
 	####TODO####
-	print(winner)
+	print("{} wins".format(winner1))
+
+	third = pile()
+	fourth = tree()
+
+	winner2 = monster_battle(third, fourth)
+
+	print("{} wins".format(winner2))
+
+	winner3 = monster_battle(winner1, winner2)
+
+	print("{} wins".format(winner3))
