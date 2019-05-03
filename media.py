@@ -4,24 +4,27 @@ class Media:
         self.__name = name
         self.__rating = rating
     def __str__(self):
-        return str(self.__media_type, self.__name, self.__rating)
+        return str(self.getType(), self.getName(), self.getRating())
     def getType(self):
         return self.__media_type
     def getName(self):
         return self.__name
     def getRating(self):
         return self.__rating
+    def getAll(self):
+        print(self)
+            
 class Movie(Media):
     def __init__(self, media_type, name, rating, director, runtime):
         self.__director = director
         self.__runtime = runtime
-        super().__init__(self)
+        super().__init__(media_type, name, rating)
 
     def __str__(self):
-        return str(self.__media_type, self.__name, self.__rating, self.__director, self.__runtime)
+        return self.getName() + "\n" + self.getDirector() + "\n" + self.getRating()
    
     def play(self):
-        print("{}, playing now".format(self.__name))
+        print("{}, playing now".format(self.getName()))
 
     def getDirector(self):
         return self.__director
@@ -33,12 +36,12 @@ class Song(Media):
     def __init__(self, media_type, name, rating, artist, album):
         self.__artist = artist
         self.__album = album
-        super().__init__(self)
+        super().__init__(media_type, name, rating)
     def __str__(self):
-        return str(self.__media_type, self.__name, self.__rating, self.__artist, self.__album)
+        return self.getName() + "\n" + self.getArtist() + "\n" + self.getAlbum() + "\n" + self.getRating()
     
     def play(self):
-        print("{} by {}, now playing".format(self.__name, self.__artist))
+        print("{} by {}, now playing".format(self.getName(), self.getArtist()))
 
     def getArtist(self):
         return self.__artist
@@ -47,14 +50,13 @@ class Song(Media):
 class Picture(Media):
     def __init__(self, media_type, name, rating, resolution):
         self.__resolution = resolution
-        super().__init__(self)
+        super().__init__(media_type, name, rating)
     
     def __str__(self):
-        return str(self.__media_type, self.__name, self.__rating, self.__resolution)
-    
-    def show(self):
-        print("Showing {}".format(self.__name))
+        return self.getName() + "\n" + self.getResolution() + "\n" + self.getRating()
+
+    def play(self):
+        print("Showing {}".format(str(self.getName())))
     
     def getResolution(self):
         return self.__resolution
-
