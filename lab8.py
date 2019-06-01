@@ -30,8 +30,9 @@ def timing(myList, myBST):
         myBST.isin(val)
     bstTime2 = time.time()
     bstTimeFinal = bstTime2 - bstTime1
-    return (listTimeFinal, bstTimeFinal)
     print("List time: {}\nBST time: {}".format(listTimeFinal, bstTimeFinal))
+    return (listTimeFinal, bstTimeFinal)
+    
 if __name__ == "__main__":
     tup=populate(100)
     newList=tup[0]
@@ -54,7 +55,24 @@ if __name__ == "__main__":
         listTimes.append(listTime)
         bstTimes.append(bstTime)
         xVals.append(n)
+    listTotal = 0
+    bstTotal = 0
+    listCount = 0
+    bstCount = 0
+    listAverage = []
+    bstAverage = []
+    for x in listTimes:
+        listTotal += x
+        listCount += 1
+        listAverage.append(listTotal/listCount)
+    for y in bstTimes:
+        bstTotal += y
+        bstCount += 1
+        bstAverage.append(bstTotal/bstCount)
     plt.plot(xVals, listTimes, label="List times")
     plt.plot(xVals, bstTimes, label="BST times")
+
+    plt.plot(xVals, listAverage, label ="list average")
+    plt.plot(xVals, bstAverage, label = "bst average")
     plt.legend()
     plt.show()

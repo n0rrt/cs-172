@@ -9,21 +9,27 @@ class invalidError(Exception):
     pass
 #creates new employee
 def makeNewEmp(idNum, rate):
-    newEmp = Employee(idNum, rate)
-    employeeList.append(newEmp)
-    validate()
+    if validate():
+        newEmp = Employee(idNum, rate)
+        employeeList.append(newEmp)
+    
 #validates that all values are acceptable
 def validate():
     index = 1
+    
     for x in range(len(employeeList)):
         for y in range(index, len(employeeList) - x): #goes through each employee object following the current and compares ids
             if (employeeList[x].getId() == employeeList[y].getId()):
-                raise invalidError
+                raise invalidError('Duplicate employee')    
+                return False
             index += 1
         if int(employeeList[x].getRate()) < 6: #validates rate
-            raise invalidError
+            raise invalidError('bla bla bla')
+            return False
         if int(employeeList[x].getHours()) < 0: #validates hours
-            raise invalidError
+            raise invalidError('something')
+            return False
+    return True
         
 '''
 a. new employee
@@ -47,8 +53,9 @@ if __name__ == "__main__":
                 idNum = input('Enter ID num: ')
                 rate = input("Enter hourly rate: ")
                 makeNewEmp(idNum, rate)
-            except(invalidError, ValueError):
-                print("Id number already assigned to employee")
+                validate()
+            except(invalidError, ValueError) as e:
+                print(str(e))
         elif userIn.lower() == 'b':
             print("set hours")
             for emp in range(len(employeeList)):
@@ -61,7 +68,7 @@ if __name__ == "__main__":
                     print("invalid input")
         elif userIn.lower() == 'c':
             print('display payroll')
-            print(str(employeeList[0]).split())
+            
             for emp in range(len(employeeList)):
                 print("ID: {}\nHours: {}\nRate: ${:.2f}\nWages: ${:.2f}\n".format(employeeList[emp].getId(), employeeList[emp].getHours(), int(employeeList[emp].getRate()), employeeList[emp].getWage()))
         elif userIn.lower() == 'd':
